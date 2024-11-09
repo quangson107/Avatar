@@ -1,16 +1,26 @@
 
-function updatePrice(months) {
-    const basicPrice = document.getElementById("basic-price");
-    const plusPrice = document.getElementById("plus-price");
-    const premiumPrice = document.getElementById("premium-price");
+function displaySubscriptionDetails(plan, monthlyPrice, months) {
+    const detailsElement = document.getElementById(`${plan}-details`);
 
-    const prices = {
-        1: { basic: 300000, plus: 500000, premium: 2000000 },
-        6: { basic: 300000 * 6 * 0.93, plus: 500000 * 6 * 0.93, premium: 2000000 * 6 * 0.93 },
-        12: { basic: 300000 * 12 * 0.9, plus: 500000 * 12 * 0.9, premium: 2000000 * 12 * 0.9 },
-    };
+    // Hide details of other plans
+    document.querySelectorAll(".price-details").forEach((el) => {
+        if (el !== detailsElement) el.innerHTML = "";
+    });
 
-    basicPrice.textContent = prices[months].basic.toLocaleString() + " VND";
-    plusPrice.textContent = prices[months].plus.toLocaleString() + " VND";
-    premiumPrice.textContent = prices[months].premium.toLocaleString() + " VND";
+    const startDate = new Date();
+    const endDate = new Date();
+    endDate.setMonth(endDate.getMonth() + parseInt(months));
+
+    const discountRates = { 6: 0.93, 12: 0.9 };
+    const price = months === 1 
+        ? monthlyPrice 
+        : Math.round(monthlyPrice * months * (discountRates[months] || 1));
+
+    const currentMonth = startDate.getMonth() + 1;
+    const currentYear = startDate.getFullYear();
+
+    detailsElement.innerHTML = `
+        <p><strong>Phí tháng ${currentMonth}/${currentYear}:</strong> ${price.toLocaleString()} VND</p>
+        <p><strong>Thời gian sử dụng:</strong> ${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}</p>
+    `;
 }
