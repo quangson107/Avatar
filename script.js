@@ -14,7 +14,7 @@ function calculateFee(monthlyFee) {
         <p><strong>Phí lẻ tháng:</strong> ${proRatedFee.toLocaleString()} VND (bắt đầu từ hôm nay)</p>
         <p><strong>Phí trả trước 6 tháng:</strong> ${fee6Months.toLocaleString()} VND</p>
         <p><strong>Phí trả trước 12 tháng:</strong> ${fee12Months.toLocaleString()} VND</p>
-        <a href="http://bit.ly/zaloEntrade" class="cta">Đăng Ký Ngay</a>
+        <a href="http://bit.ly/zaloEntrade" class="cta-button">Đăng Ký Ngay</a>
     `;
 
     if (monthlyFee === 300000) {
